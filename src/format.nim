@@ -1,6 +1,6 @@
 import
   macros, options, posix, sequtils, strutils, sugar, times, unicode,
-  utils, "listcomp"
+  utils
 
 type
   PackageLineFormat* = tuple[
@@ -83,9 +83,7 @@ proc splitLines(text: string, lineSize: int, lines: seq[string] = @[]): seq[stri
   if not addBreaks:
     lines & text
   else:
-    var offset : int = -1
-    if text.len() != 0:
-      offset = text.runeOffset(lineSize)
+    let offset = text.runeOffset(lineSize)
     if offset < 0:
       lines & text
     else:
