@@ -64,6 +64,12 @@ proc curlWriteMemory(mem: cstring, size: csize_t, nmemb: csize_t,
   let total = size * nmemb
   if total > 0:
     userData.data &= toOpenArray(mem,0,int(total - 1))
+    #or, if we follow more closely curls example https://curl.haxx.se/libcurl/c/CURLOPT_WRITEFUNCTION.html
+    #[
+    let oldlen=userData.data.len
+    userData.data.setLen(oldlen+total.int)
+    copyMem(userData.data[oldlen].addr,mem,total.int)
+    ]#
   total
 
 var refCount = 0
