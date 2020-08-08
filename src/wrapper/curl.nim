@@ -63,7 +63,7 @@ proc curlWriteMemory(mem: cstring, size: csize_t, nmemb: csize_t,
 
   let total = size * nmemb
   if total > 0:
-    userData.data &= toOpenArray(mem,0,total - 1)
+    userData.data &= toOpenArray(mem,0,int(total - 1))
   total
 
 var refCount = 0
